@@ -48,10 +48,17 @@
 
       const player = new shaka.Player(video);
 
-      player.configure({
+player.configure({
   drm: {
-    servers: {"com.widevine.alpha":""}, // no license servers
-    clearKeys: {}, // no keys
+    servers: {
+      'com.widevine.alpha': 'https://widevine-license-server.com/getlicense'
+    },
+    advanced: {
+      'com.widevine.alpha': {
+        videoRobustness: 'SW_SECURE_DECODE',
+        audioRobustness: 'SW_SECURE_CRYPTO'
+      }
+    }
   }
 });
 
